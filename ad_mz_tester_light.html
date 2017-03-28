@@ -1,0 +1,70 @@
+<!-- MZ Remote Playable Tester *Light* -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+        <meta charset="UTF-8">
+        <script src="https://assets.applovin.com/jquery-2.1.1.min.js"></script>
+        <style>
+        * {
+            margin:0;
+            padding:0
+        }
+    
+        html, body { 
+            height: 100%;
+            width: 100%;
+        }
+
+        iframe {
+            height:100%;
+            width:100%;
+            border: 0;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        window["AppLovinGameState"] = {
+            currentWrapper: 0,
+            
+            maybeReinitialize : function() {
+                
+                var adUrl = "https://d1ovo20x1yw5yz.cloudfront.net/creatives/RDF_1.6.3/index_a1.6.3.html";
+                var redirectUrl = "http://google.com";
+            
+                var fullGameUrl = adUrl + "?click_url=" + encodeURIComponent(redirectUrl);
+    
+                var adWrapper = document.createElement('iframe');
+                adWrapper.width = jQuery(window).width();
+                adWrapper.height = jQuery(window).height();
+                adWrapper.src = fullGameUrl;
+
+                document.body.appendChild(adWrapper);
+                
+                this.currentWrapper = adWrapper;
+            }
+        };
+    </script>
+    
+    </head>
+<body>    
+    <script type="text/javascript">
+        document.ontouchmove = function(event){
+            event.preventDefault();
+        };
+        
+        jQuery(document).ready(function() {
+            if ( document.hidden ) {
+                document.addEventListener("visibilitychange", function() {
+                    if (!document.hidden) {
+                        AppLovinGameState.maybeReinitialize();
+                    }
+                });
+            }
+            else {
+                AppLovinGameState.maybeReinitialize();
+            }
+        });
+    </script>
+</body>
+</html>
